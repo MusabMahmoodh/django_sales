@@ -14,6 +14,23 @@ class SalesListView(ListView):
     # by default object_list
     context_object_name = "qs"
     
+# def sales_list_view(request):
+#     qs = Sale.objects.all()
+#     return render(request,'sales/main.html',{'object_lsit':qs})
+    
 class SalesDetailView(DetailView):
     model = Sale
     template_name = 'sales/detail.html'
+    
+# def sales_detail_view(request,**kwargs):
+#      pk = kwargs.get('pk')
+# 
+# def sales_detail_view(request,pk):
+#     qs = Sale.objects.get(pk=pk)
+#     return render(request,'sales/detail.html',{'object':qs})
+
+'''
+In the urls:
+path('sales/',sales_list_view, name="list")
+path('sales/<pk>/',sales_detail_view, name="detail")
+'''
