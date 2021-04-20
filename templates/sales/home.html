@@ -1,1 +1,14 @@
-{% extends 'base.html' %} {% block title %} Sales Home {% endblock title %} {% block content %} Sales Home {% endblock content %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} 
+ Sales Home
+{% endblock title %} 
+{% block content %} 
+{{hello}}
+<form method="POST" action="">
+    {% csrf_token %}
+    {{form|crispy}}
+    <button type="submit" class="btn btn-primary mt-3">Search</button>
+</form
+  Sales Home 
+{% endblock content %}
