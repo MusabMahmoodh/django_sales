@@ -3,6 +3,7 @@ from products.models import Product
 from customers.models import Customer
 from profiles.models import Profile
 from django.utils import timezone
+from django.shortcuts import reverse
 
 from .utils import generate_code
 # Create your models here.
@@ -52,6 +53,8 @@ class Sale(models.Model):
     def get_positions(self):
         return self.positions.all()
 
+    def get_absolute_url(self):
+        return reverse('sales:detail', kwargs={'pk':self.pk}) #appname:name
 class CSV(models.Model):
     file_name = models.FileField(upload_to='csv')
     activated = models.BooleanField(default=False)
