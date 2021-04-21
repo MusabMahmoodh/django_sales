@@ -6,7 +6,11 @@ Sales List
 Slaes list 
 <br>
 {% for item in object_list %}
-    <a href={{item.get_absolute_url}}>{{ item.transaction_id}}</a>
+<div class="card mb-3">
+  {% comment %} <a href={{item.get_absolute_url}}>{{ item.transaction_id}}</a> {% endcomment %}
+    <a href={% url 'sales:detail' item.pk %} class="card-body">{{ item.transaction_id}}</a>
+</div>
+  
    
 {% endfor %}
 {% endblock content %}

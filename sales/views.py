@@ -6,8 +6,12 @@ from .forms import SalesSearchForm
 #function views are more readable than class views
 def home_view(request):
     form  = SalesSearchForm(request.POST or None)
+    
+    if(request.method == "POST"):
+        date_from = request.POST.get('date_from')
+        date_to = request.POST.get('date_to')
+        chart_type = request.POST.get('chart_type')
     context = {
-        'hello':"hello world",
         'form': form
     }
     return render(request,'sales/home.html',context)
