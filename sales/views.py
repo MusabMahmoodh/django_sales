@@ -7,6 +7,7 @@ import pandas as pd
 # Create your views here.
 #function views are more readable than class views
 def home_view(request):
+    sales_df=None
     form  = SalesSearchForm(request.POST or None)
     
     if(request.method == "POST"):
@@ -14,21 +15,25 @@ def home_view(request):
         date_to = request.POST.get('date_to')
         chart_type = request.POST.get('chart_type')
 
-        qs = Sale.objects.filter(created__date=date_from)
-        print('--------------')
-        df1= pd.DataFrame(qs.values())
+        qs = Sale.objects.filter(created__date__lte=date_to,created__date__gte=date_from)
+        if len(qs) > 0:
+            sales_df= pd.DataFrame(qs.values())        
+            sales_df= sales_df.to_html()
+        else:
+            print("no data")
+        # print('--------------')
+     
+        # print('--------------')
+        # print('--------------')
+        # df2= pd.DataFrame(qs.values_list())
         
-        print(df1)
-        print('--------------')
-        print('--------------')
-        df2= pd.DataFrame(qs.values_list())
-        
-        print(df2)
-        print('--------------')
+        # print(df2)
+        # print('--------------')
     obj = Sale.objects.get(id=1)
 
     context = {
-        'form': form
+        'form': form,
+        'sales_df':sales_df,
     }
     return render(request,'sales/home.html',context)
 
